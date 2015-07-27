@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Visible Letters</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="enter_here">Type a letter or phrase here</string>
+    <string name="pref_title_default">Default</string>
+    <string name="pref_summary_default">Style of unconfigured letters</string>
+
+    <string name="roboto_font_name" translatable="false">roboto</string>
+    <string name="serif_font_name" translatable="false">serif</string>
+    <string name="monospace_font_name" translatable="false">monospace</string>
+    <string name="default_font" translatable="false">@string/roboto_font_name</string>
+    <string-array name="fonts">
+        <item>@string/roboto_font_name</item>
+        <item>@string/serif_font_name</item>
+        <item>@string/monospace_font_name</item>
+    </string-array>
+    <string-array name="fonts_with_default">
+        <item>@string/pref_title_default</item>
+        <item>@string/roboto_font_name</item>
+        <item>@string/serif_font_name</item>
+        <item>@string/monospace_font_name</item>
+    </string-array>
+
+    <string name="default_size" translatable="false">300</string>
+    <string-array name="sizes">
+        <item translatable="false">200</item>
+        <item translatable="false">300</item>
+        <item translatable="false">500</item>
+        <item translatable="false">750</item>
+        <item translatable="false">1000</item>
+        <item translatable="false">1300</item>
+    </string-array>
+
+    <string-array name="sizes_with_default">
+        <item>@string/pref_title_default</item>
+        <item translatable="false">200</item>
+        <item translatable="false">300</item>
+        <item translatable="false">500</item>
+        <item translatable="false">750</item>
+        <item translatable="false">1000</item>
+        <item translatable="false">1300</item>
+    </string-array>
+
+    <string-array name="color_entries">
+        <item>Red</item>
+        <item>Purple</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+    </string-array>
+
+    <string-array name="color_entries_with_default">
+        <item>@string/pref_title_default</item>
+        <item>Red</item>
+        <item>Purple</item>
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Orange</item>
+    </string-array>
+
+    <string name="material_red_500" translatable="false">0xfff44336</string>
+    <string name="material_purple_500" translatable="false">0xff9c27b0</string>
+    <string name="material_blue_500" translatable="false">0xff2196f3</string>
+    <string name="material_green_500" translatable="false">0xff4caf50</string>
+    <string name="material_yellow_500" translatable="false">0xffffeb3b</string>
+    <string name="material_orange_500" translatable="false">0xffff9800</string>
+    <string name="default_color" translatable="false">@string/material_yellow_500</string>
+    <string-array translatable="false" name="color_values">
+        <item>@string/material_red_500</item>
+        <item>@string/material_purple_500</item>
+        <item>@string/material_blue_500</item>
+        <item>@string/material_green_500</item>
+        <item>@string/material_yellow_500</item>
+        <item>@string/material_orange_500</item>
+    </string-array>
+
+    <string-array translatable="false" name="color_values_with_default">
+        <item>@string/pref_title_default</item>
+        <item>@string/material_red_500</item>
+        <item>@string/material_purple_500</item>
+        <item>@string/material_blue_500</item>
+        <item>@string/material_green_500</item>
+        <item>@string/material_yellow_500</item>
+        <item>@string/material_orange_500</item>
+    </string-array>
+
+    <string name="font_pref_title">Font</string>
+    <string name="size_pref_title">Size</string>
+    <string name="color_pref_title">Color</string>
+
+    <!-- Keys -->
+    <string translatable="false" name="current_letter_font_key">curr_font</string>
+    <string translatable="false" name="current_letter_color_key">curr_color</string>
+    <string translatable="false" name="current_letter_size_key">curr_size</string>
+    <string translatable="false" name="font_key_format">%s_font_key</string>
+    <string translatable="false" name="size_key_format">%s_size_key</string>
+    <string translatable="false" name="color_key_format">%s_color_key</string>
+
+</resources>
