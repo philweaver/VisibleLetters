@@ -1,6 +1,7 @@
 package com.switchamajig.visibleletters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
@@ -15,6 +16,8 @@ import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,10 +29,21 @@ public class MainActivity extends Activity implements TextWatcher,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText editText = (EditText) findViewById(R.id.text_entry_view);
+        final EditText editText = (EditText) findViewById(R.id.text_entry_view);
         editText.addTextChangedListener(this);
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
+        Button moveLettersButton = (Button) findViewById(R.id.move_text_button);
+        moveLettersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launchMoveLettersIntent =
+                        new Intent(MainActivity.this, LetterMovingActivity.class);
+                launchMoveLettersIntent.putExtra(
+                        LetterMovingActivity.EXTRA_TEXT_TO_MOVE, editText.getText().toString());
+                startActivity(launchMoveLettersIntent);
+            }
+        });
     }
 
     @Override
@@ -80,18 +94,19 @@ public class MainActivity extends Activity implements TextWatcher,
 
         for (int i = 0; i < s.length(); ++i) {
             char[] currentChar = {s.charAt(i)};
-            TextAppearanceSpan span = getTextAppearanceForChar(currentChar[0]);
+            TextAppearanceSpan span = getTextAppearanceForChar(this, currentChar[0]);
             stringBuilder.append(new String(currentChar), span, Spanned.SPAN_INTERMEDIATE);
         }
         displayView.setText(stringBuilder);
     }
 
-    private TextAppearanceSpan getTextAppearanceForChar(char forChar) {
+    /* TODO(pweaver) Move to utils class */
+    public static TextAppearanceSpan getTextAppearanceForChar(Context context, char forChar) {
         char[] charArray = {forChar};
         String forCharString = new String(charArray);
-        String font = LetterStylePreference.getFontFor(this, forCharString);
-        int size = LetterStylePreference.getSizeFor(this, forCharString);
-        int color = LetterStylePreference.getColorFor(this, forCharString);
+        String font = LetterStylePreference.getFontFor(context, forCharString);
+        int size = LetterStylePreference.getSizeFor(context, forCharString);
+        int color = LetterStylePreference.getColorFor(context, forCharString);
         return new TextAppearanceSpan(font,
                 0 /* Style */,
                 size,

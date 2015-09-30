@@ -5,6 +5,7 @@
     <string name="enter_here">Type a letter or phrase here</string>
     <string name="pref_title_default">Default</string>
     <string name="pref_summary_default">Style of unconfigured letters</string>
+    <string name="move_letters">Move Letters</string>
 
     <string name="roboto_font_name" translatable="false">roboto</string>
     <string name="serif_font_name" translatable="false">serif</string>
@@ -98,5 +99,7 @@
     <string translatable="false" name="font_key_format">%s_font_key</string>
     <string translatable="false" name="size_key_format">%s_size_key</string>
     <string translatable="false" name="color_key_format">%s_color_key</string>
+    <string name="title_activity_letter_moving">LetterMovingActivity</string>
+
 
 </resources>
