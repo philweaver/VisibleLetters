@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.TextAppearanceSpan;
@@ -19,17 +17,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 
 public class MainActivity extends Activity implements TextWatcher,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
+    private int indexOfChange;
+    private int changeCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final EditText editText = (EditText) findViewById(R.id.text_entry_view);
+        final EditText editText = (EditText) findViewById(R.id.text_display_view);
         editText.addTextChangedListener(this);
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
@@ -84,20 +84,17 @@ public class MainActivity extends Activity implements TextWatcher,
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        indexOfChange = start;
+        changeCount = count;
     }
 
     @Override
     public void afterTextChanged(Editable s) {
-        TextView displayView = (TextView) findViewById(R.id.text_display_view);
-        SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-
-        for (int i = 0; i < s.length(); ++i) {
-            char[] currentChar = {s.charAt(i)};
+        while (changeCount-- > 0) {
+            char[] currentChar = {s.charAt(indexOfChange + changeCount)};
             TextAppearanceSpan span = getTextAppearanceForChar(this, currentChar[0]);
-            stringBuilder.append(new String(currentChar), span, Spanned.SPAN_INTERMEDIATE);
+            s.setSpan(span, indexOfChange + changeCount, indexOfChange + changeCount + 1, Spanned.SPAN_INTERMEDIATE);
         }
-        displayView.setText(stringBuilder);
     }
 
     /* TODO(pweaver) Move to utils class */
@@ -116,7 +113,10 @@ public class MainActivity extends Activity implements TextWatcher,
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        EditText editText = (EditText) findViewById(R.id.text_entry_view);
-        afterTextChanged(editText.getText());
+        EditText editText = (EditText) findViewById(R.id.text_display_view);
+        Editable text = editText.getText();
+        onTextChanged(text, 0, text.length(), text.length());
+        afterTextChanged(text);
+        editText.setText(text, null);
     }
 }

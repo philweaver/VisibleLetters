@@ -19,11 +19,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/move_letters"/>
-        <EditText
-            android:id="@+id/text_entry_view"
-            android:hint="@string/enter_here"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <ScrollView
@@ -33,10 +28,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="center">
-            <TextView
+            <EditText
                 android:id="@+id/text_display_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cursorVisible="false"
+                android:background="@android:color/transparent"
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"/>
         </HorizontalScrollView>
