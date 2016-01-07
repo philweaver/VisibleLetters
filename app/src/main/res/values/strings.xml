@@ -26,6 +26,7 @@
     <string name="default_size" translatable="false">300</string>
     <string-array name="sizes">
         <item translatable="false">300</item>
+        <item translatable="false">400</item>
         <item translatable="false">500</item>
         <item translatable="false">660</item>
         <item translatable="false">680</item>
@@ -36,6 +37,7 @@
     <string-array name="sizes_with_default">
         <item>@string/pref_title_default</item>
         <item translatable="false">300</item>
+        <item translatable="false">400</item>
         <item translatable="false">500</item>
         <item translatable="false">660</item>
         <item translatable="false">680</item>

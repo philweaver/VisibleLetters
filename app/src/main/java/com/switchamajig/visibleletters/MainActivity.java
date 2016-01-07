@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
@@ -17,6 +18,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 
 public class MainActivity extends Activity implements TextWatcher,
@@ -31,6 +38,22 @@ public class MainActivity extends Activity implements TextWatcher,
         setContentView(R.layout.activity_main);
         final EditText editText = (EditText) findViewById(R.id.text_display_view);
         editText.addTextChangedListener(this);
+        Intent intent = getIntent();
+        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+            File file = new File(intent.getData().getPath());
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                StringBuilder stringBuilder = new StringBuilder();
+                String receiveString;
+                while ((receiveString = reader.readLine()) != null) {
+                    stringBuilder.append(receiveString);
+                    stringBuilder.append("\n");
+                }
+                editText.setText(stringBuilder, null);
+            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
+            }
+        }
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
         Button moveLettersButton = (Button) findViewById(R.id.move_text_button);
