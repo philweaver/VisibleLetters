@@ -56,17 +56,6 @@ public class MainActivity extends Activity implements TextWatcher,
         }
         PreferenceManager.getDefaultSharedPreferences(this)
                 .registerOnSharedPreferenceChangeListener(this);
-        Button moveLettersButton = (Button) findViewById(R.id.move_text_button);
-        moveLettersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent launchMoveLettersIntent =
-                        new Intent(MainActivity.this, LetterMovingActivity.class);
-                launchMoveLettersIntent.putExtra(
-                        LetterMovingActivity.EXTRA_TEXT_TO_MOVE, editText.getText().toString());
-                startActivity(launchMoveLettersIntent);
-            }
-        });
     }
 
     @Override
@@ -93,6 +82,16 @@ public class MainActivity extends Activity implements TextWatcher,
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+
+        if (id == R.id.move_letters) {
+            Intent launchMoveLettersIntent =
+                    new Intent(MainActivity.this, LetterMovingActivity.class);
+            EditText editText = (EditText) findViewById(R.id.text_display_view);
+            launchMoveLettersIntent.putExtra(
+                    LetterMovingActivity.EXTRA_TEXT_TO_MOVE, editText.getText().toString());
+            startActivity(launchMoveLettersIntent);
             return true;
         }
 
