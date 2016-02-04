@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/move_letters" android:title="@string/move_letters"
+    <item android:id="@+id/main_menu" android:title="@string/stop_talking"
         android:orderInCategory="100" app:showAsAction="never" />
-    <item android:id="@+id/speak_when_typing" android:title="@string/speak_when_typing"
-        android:orderInCategory="101" app:showAsAction="never" />
 </menu>

@@ -5,18 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.TextAppearanceSpan;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.BufferedReader;
@@ -60,9 +56,9 @@ public class MainActivity extends Activity implements TextWatcher,
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         PreferenceManager.getDefaultSharedPreferences(this)
                 .unregisterOnSharedPreferenceChangeListener(this);
+        super.onDestroy();
     }
 
     @Override
@@ -94,6 +90,18 @@ public class MainActivity extends Activity implements TextWatcher,
             startActivity(launchMoveLettersIntent);
             return true;
         }
+
+        if (id == R.id.speak_when_typing) {
+            startActivity(new Intent(MainActivity.this, TalkingActivity.class));
+            return true;
+        }
+
+        if (id == R.id.main_menu) {
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
+            return true;
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }

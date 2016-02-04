@@ -28,6 +28,10 @@
             android:name=".LetterMovingActivity"
             android:label="@string/title_activity_letter_moving" >
         </activity>
+        <activity
+            android:name=".TalkingActivity"
+            android:label="@string/title_activity_talking" >
+        </activity>
     </application>
 
 </manifest>
