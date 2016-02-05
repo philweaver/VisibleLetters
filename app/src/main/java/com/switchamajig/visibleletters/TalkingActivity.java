@@ -28,6 +28,7 @@ public class TalkingActivity extends MainActivity implements TextToSpeech.OnInit
     private Set<String> dictionary = new HashSet<>();
     private boolean ttsInitialized;
     private TextToSpeech tts;
+    private int lastTextLength = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,8 @@ public class TalkingActivity extends MainActivity implements TextToSpeech.OnInit
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 int cursorPosition =
                         ((EditText) findViewById(R.id.text_display_view)).getSelectionStart();
-                //CharSequence text = ((EditText) findViewById(R.id.text_display_view)).getText();
-                if (ttsInitialized && (tts != null) && (cursorPosition > 0)) {
+                if (ttsInitialized && (tts != null) && (cursorPosition > 0)
+                        && (s.length() > lastTextLength)) {
                     char newChar = s.charAt(cursorPosition - 1);
                     if ((newChar == ' ') || (newChar == '\n')) {
                         String currentWord = getCurrentWord().toLowerCase();
@@ -74,6 +75,7 @@ public class TalkingActivity extends MainActivity implements TextToSpeech.OnInit
                         Log.d(LOG_TAG, "Trying to say letter " + keyString);
                     }
                 }
+                lastTextLength = s.length();
             }
 
             @Override

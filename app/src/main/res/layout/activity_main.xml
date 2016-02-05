@@ -13,6 +13,10 @@
     <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
+        <HorizontalScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center">
             <EditText
                 android:id="@+id/text_display_view"
                 android:layout_width="fill_parent"
@@ -20,8 +24,7 @@
                 android:cursorVisible="false"
                 android:background="@android:color/transparent"
                 android:paddingLeft="0dp"
-                android:paddingRight="0dp"
-                android:inputType="textNoSuggestions"
-                android:scrollHorizontally="true"/>
+                android:paddingRight="0dp"/>
+        </HorizontalScrollView>
     </ScrollView>
 </LinearLayout>
