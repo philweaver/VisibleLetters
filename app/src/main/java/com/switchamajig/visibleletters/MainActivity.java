@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class MainActivity extends Activity implements TextWatcher,
@@ -38,7 +40,8 @@ public class MainActivity extends Activity implements TextWatcher,
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             File file = new File(intent.getData().getPath());
             try {
-                BufferedReader reader = new BufferedReader(new FileReader(file));
+                InputStream inputStream = getContentResolver().openInputStream(intent.getData());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 StringBuilder stringBuilder = new StringBuilder();
                 String receiveString;
                 while ((receiveString = reader.readLine()) != null) {
