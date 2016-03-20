@@ -1,20 +1,18 @@
 package com.switchamajig.visibleletters;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashSet;
@@ -32,7 +30,7 @@ public class TalkingActivity extends MainActivity implements TextToSpeech.OnInit
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        setupWithLayout(savedInstanceState, R.layout.activity_talking);
         tts = new TextToSpeech(this, this);
         if (tts == null) {
             Log.d("TalkingActivity", "tts is null");
@@ -96,14 +94,33 @@ public class TalkingActivity extends MainActivity implements TextToSpeech.OnInit
     @Override
     public void onInit(int status) {
         ttsInitialized = true;
+        TwoKeystrokeTypingEditText editText = (TwoKeystrokeTypingEditText) findViewById(R.id.text_display_view);
+        editText.setTts(tts);
         Log.d("TalkingActivity", "TTS initialized with status " + status);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_talking, menu);
-        return true;    }
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.toggle_double_key_hit) {
+            TwoKeystrokeTypingEditText editText = (TwoKeystrokeTypingEditText) findViewById(R.id.text_display_view);
+            editText.toggleDoubleKeyHit();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     String getCurrentWord() {
         EditText editText = (EditText) findViewById(R.id.text_display_view);
         int cursorPosition = editText.getSelectionStart();
